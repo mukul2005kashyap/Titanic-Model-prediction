@@ -31,10 +31,10 @@ sibsp=st.sidebar.number_input("enter sibsp", 0 ,8)
 parch=st.sidebar.number_input("enter parch", 0 ,6)
 fare=st.sidebar.number_input("enter fare", 0.0, 512.0)
 
-if sex=="Male":
-    sex=1
+if sex==0:
+    sex="female"
 else:
-    sex=0
+    sex="male"
 
 st.title("🚢 Titanic Survival Prediction App")
 st.write("### Enter passenger Details to Sidebar for check Predection Chance..")
@@ -53,4 +53,3 @@ if st.button("Predict"):
         st.success("Survived")
     else:
         st.success("Not Survived")
-
