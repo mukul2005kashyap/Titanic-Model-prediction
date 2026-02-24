@@ -1,5 +1,5 @@
 import joblib
-import streamlit as st
+import streamlit as st #type: ignore
 titanic_model=joblib.load("titanicmodel.pkl")
 
 
@@ -31,24 +31,21 @@ sibsp=st.sidebar.number_input("enter sibsp", 0 ,8)
 parch=st.sidebar.number_input("enter parch", 0 ,6)
 fare=st.sidebar.number_input("enter fare", 0.0, 512.0)
 
-if sex==0:
-    sex="female"
-else:
-    sex="male"
+sex_numeric = 0 if sex == "Male" else 1
 
 st.title("🚢 Titanic Survival Prediction App")
 st.write("### Enter passenger Details to Sidebar for check Predection Chance..")
 
 st.subheader("👤 Passenger Details")
 st.write(f"**P_Class:** {pclass}")
-st.write(f"**Gender:** {sex}")
+st.write(f"**Gender:** {sex_numeric}")
 st.write(f"**Age:** {age}")
 st.write(f"**Siblings/Spouse:** {sibsp}")
 st.write(f"**Parents/Children:** {parch}")
 st.write(f"**Fare:** ${fare}")
 
 if st.button("Predict"):
-    result=titanic_model.predict([[pclass, sex ,age ,sibsp ,parch ,fare]])
+    result=titanic_model.predict([[pclass, sex_numeric ,age ,sibsp ,parch ,fare]])
     if result ==1:
         st.success("Survived")
     else:
